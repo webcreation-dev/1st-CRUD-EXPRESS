@@ -1,5 +1,5 @@
 const express = require('express');
-const { setPosts, getPosts, editPosts, deletePosts } = require('../controllers/post.controller');
+const { setPosts, getPosts, editPosts, deletePosts, toggleLikePost } = require('../controllers/post.controller');
 
 const router = express.Router();
 
@@ -11,8 +11,6 @@ router.put('/:id', editPosts);
 
 router.delete('/:id', deletePosts);
 
-router.patch("toggle-like-post/:id", (req, res) => {
-    res.json({message: "Like du post " + req.params.id});
-});
+router.patch("/toggle-like/:id", toggleLikePost);
 
 module.exports = router;

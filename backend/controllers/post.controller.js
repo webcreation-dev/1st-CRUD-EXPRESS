@@ -53,3 +53,17 @@ module.exports.deletePosts = async (req, res) => {
     res.status(200).json({message: "Post supprimé"});
 
 }
+
+module.exports.toggleLikePost = async (req, res) => {
+    try {
+        await PostModel.findByIdAndUpdate(
+            req.params.id,
+            { $addToSet: { likers: req.body.userId } },
+            { new: true } 
+        ).then((data) => res.status(200).send(data));
+
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
